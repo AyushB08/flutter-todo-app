@@ -41,7 +41,7 @@ class HomeState extends State<Home> {
                         margin: EdgeInsets.only(top: 50, bottom: 20),
                         child: Text("To-Do List", style: TextStyle(fontSize: 30, fontWeight: FontWeight.w500,))
                       ),
-                      for (ToDo todoo in todosList)
+                      for (ToDo todoo in foundToDo.reversed)
                         ToDoItem(
                           todo: todoo,
                           onToDoChanged: handleToDoChange,
@@ -123,6 +123,22 @@ class HomeState extends State<Home> {
     
   }
 
+
+  void runFilter(String enteredKeyword) {
+    List<ToDo> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = todosList;
+    } else {
+      results = todosList.where((item) => item.todoText!.toLowerCase().contains(enteredKeyword.toLowerCase())).toList();
+    }
+
+    setState(() {
+      foundToDo = results;
+    });
+  }
+
+
+
   Widget searchBox() {
     return ( 
       Container( 
@@ -132,6 +148,7 @@ class HomeState extends State<Home> {
                 borderRadius: BorderRadius.circular(20)
               ),
               child: TextField( 
+                onChanged: (value) => runFilter(value),
                 decoration: InputDecoration( 
                   contentPadding: EdgeInsets.all(0),
                   prefixIcon: Icon(
