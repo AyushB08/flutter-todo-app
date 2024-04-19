@@ -1,7 +1,7 @@
-# flutter_todo_app
+# About
 
-To-Do List App created with Flutter.
+To-Do List App created with Flutter. Users can add/remove items and filter their list by searching for keywords.
 
 # Demo
 
-[Demo Video](coming soon)
+Demo Video (coming soon)
